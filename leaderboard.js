@@ -18,7 +18,14 @@ app.get('/api/user/:id/:score', async (req, res) => {
 		value: id,
 	});
 
-	const leaderboardList = await redisClient.ZRANGE(leaderboardKey, 0, 500000);
+	const leaderboardList = await redisClient.zRangeWithScores(
+		leaderboardKey,
+		0,
+		50000,
+		{
+			REV: true,
+		}
+	);
 	console.log({ id, score, leaderboardList });
 
 	res.send(leaderboardList);
