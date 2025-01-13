@@ -1,4 +1,4 @@
-import express, { request, response } from 'express';
+import express from 'express';
 import redisClient from './redis.js';
 
 const app = express();
